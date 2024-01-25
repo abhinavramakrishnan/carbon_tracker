@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+
+
+
+{% block content %}
+<br>
+<div class="container">
+	<div class="row">
+		<!-- left  -->
+		<div class="col">
+			<div class="card-body text-white">
+				<h1><b>Calculator</b></h1>
+				<div id = "appliance_container" >
+					{% if appliances|length == 0 %}
+						<div class = "card appliance" id="appliance_1">
+							<form action="" method="post" name="appliance">
+							
+								<label for="applianceName">Appliance Name:</label>
+								{{ form.applianceName(class_='form-control')}}
+								{% for error in form.watts.errors %}
+								<div class="alert alert-danger w-100" role="alert">
+									[{{ error }}]
+								</div>
+								{% endfor %} <br>
+								
+								<label for="watts">Watts:</label>
+								{{ form.watts(class_='form-control')}}
+								{% for error in form.watts.errors %}
+								<div class="alert alert-danger w-100" role="alert">
+									[{{ error }}]
+								</div>
+								{% endfor %} <br>
+				
+								<label for="hoursPerDay">Hours per day:</label>
+								{{ form.hoursPerDay(class_='form-control')}}
+								{% for error in form.hoursPerDay.errors %}
+								<div class="alert alert-danger w-100" role="alert">
+									[{{ error }}]
+								</div>
+								{% endfor %} <br>
+							</form>
+			
+							<button type="button" class="btn btn-danger">Remove Appliance</button>
+						</div>
+					{% else %}
+						{% for appliance in appliances %}
+							<div class = "card appliance" id="appliance_{{appliance.applianceID}}">
+								<form action="" method="post" name="appliance">
+									<!-- this field is the unique id generated for this request used to prevent CSRF  -->
+									{{ form.hidden_tag() }}
+								
+									<label for="applianceName">Appliance Name:</label>
+									{{ form.applianceName(class_='form-control')}}
+									{% for error in form.watts.errors %}
+									<div class="alert alert-danger w-100" role="alert">
+										[{{ error }}]
+									</div>
+									{% endfor %} <br>
+									
+									<label for="watts">Watts:</label>
+									{{ form.watts(class_='form-control')}}
+									{% for error in form.watts.errors %}
+									<div class="alert alert-danger w-100" role="alert">
+										[{{ error }}]
+									</div>
+									{% endfor %} <br>
+					
+									<label for="hoursPerDay">Hours per day:</label>
+									{{ form.hoursPerDay(class_='form-control')}}
+									{% for error in form.hoursPerDay.errors %}
+									<div class="alert alert-danger w-100" role="alert">
+										[{{ error }}]
+									</div>
+									{% endfor %} <br>
+								</form>
+				
+								<button type="button" class="btn btn-danger">Remove Appliance</button>
+							</div>
+						{% endfor %}
+					{% endif %}
+				</div>
+				
+				<button type="button" class="btn btn-success">+ Add New Appliance</button>
+				<hr>
+				<button type="button" class="btn btn-primary">Calculate & Save</button>
+				
+			</div>
+		</div>
+		<!-- right  -->
+		<div class="col">
+			<div class="card">
+				<h1><b>Results</b></h1>
+				<br>
+				{% if appliances|length == 0 %}
+					<p>You don't have any appliances. Add some appliances and click calculate.</p>
+				{% else %}
+					<p>jfguyfuydufdtdydydt</p>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

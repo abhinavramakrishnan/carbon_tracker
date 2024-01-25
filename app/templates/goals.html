@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+    <br>
+    <div class="col-md card">
+        <div class="card-body text-dark">
+            <!--This is for the goal setting part of the application.-->
+            <h1>Targets</h1>
+            <form class="form-horizontal" action="" method="post" name="changeTargets">
+                {{ form.hidden_tag() }}
+                <div class="form-row">
+
+                    <label for="energyTarget">Energy:</label> {{ form.energyTarget(class_="col") }}
+                    <label for="emissionTarget">Emission:</label> {{ form.emissionTarget(class_='col') }}
+                    <label for="costTarget">Cost:</label> {{ form.costTarget(class_='col') }}
+                    <input type="submit" name="ChangeGoal" value="Set Goal"
+                        style="background-color: #50C878; color: white; padding-left: 30px; padding-right: 30px;">
+                    <!--The function should reset the user's goals to new goals.-->
+                </div>
+            </form>
+            <br>
+
+            <!--This is for the displaying of data...-->
+            <div class="row">
+                <div class="col">
+                    <div class="d-flex align-items-center">
+                        <div class="progress-label">Energy (KWH):</div>
+                        <div class="progress-container flex-grow-1" style="padding-left:5px">
+                            <div class="progress" style="height: 30px;">
+                                <div class="progress-bar progress-bar-striped" role="progressbar"
+                                    style="width: {{energyPercent}}%;"></div>
+                            </div>
+                        </div>
+                        {% if energyPercent >= 100.0 %}
+                        <h2 style="padding-left: 10px;">Over</h2>
+                        {% else %}
+                        <h2 style="padding-left: 10px;">{{energyPercent}}%</h2>
+                        {% endif %}
+                    </div>
+                    <br>
+                    <div class="d-flex align-items-center">
+                        <div class="progress-label">Emissions (em):</div>
+                        <div class="progress-container flex-grow-1" style="padding-left:5px">
+                            <div class="progress" style="height: 30px;">
+                                <div class="progress-bar progress-bar-striped" role="progressbar"
+                                    style="width: {{emPercent}}%"></div>
+                            </div>
+                        </div>
+                        {% if emPercent >= 100.0 %}
+                        <h2 style="padding-left: 10px;">Over</h2>
+                        {% else %}
+                        <h2 style="padding-left: 10px;">{{emPercent}}%</h2>
+                        {% endif %}
+                    </div>
+                    <br>
+                    <div class="d-flex align-items-center">
+                        <div class="progress-label">Cost (£):</div>
+                        <div class="progress-container flex-grow-1" style="padding-left:5px">
+                            <div class="progress" style="height: 30px;">
+                                <div class="progress-bar progress-bar-striped" role="progressbar"
+                                    style="width: {{costPercent}}%;"></div>
+                            </div>
+                        </div>
+                        {% if costPercent >= 100.0 %}
+                        <h2 style="padding-left: 10px;">Over</h2>
+                        {% else %}
+                        <h2 style="padding-left: 10px;">{{costPercent}}%</h2>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <!-- This is for the suggestion cards below (they suggest what the user can do to avoid things!) -->
+            <br>
+            <br>
+            <div class="row">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">Energy (kWh)</div>
+                        <!-- Displays just the number if there is no goal set. -->
+                        <div class="card-body">
+                            {% if energyGoal == 0.0 %}
+                            <h4 class="card-title">{{ energyCurrent }}kWh</h4>
+                            {% else %}
+                            <h4 class="card-title">{{ energyCurrent }}/{{ energyGoal }}</h4>
+                            {% endif %}
+
+                            <p class="card-text">{{energyText}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">Emission (Co2e)</div>
+                        <!-- Displays just the number if there is no goal set. -->
+                        <div class="card-body">
+                            {% if emGoal == 0.0 %}
+                            <h4 class="card-title">{{emCurrent}}CO2e</h4>
+                            {%else%}
+                            <h4 class="card-title">{{emCurrent}}/{{emGoal}}</h4>
+                            {%endif%}
+                            <p class="card-text">{{emText}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">Cost (£)</div>
+                        <!-- Displays just the number if there is no goal set. -->
+                        <div class="card-body">
+                            {% if costGoal == 0.0 %}
+                            <h4 class="card-title">{{costCurrent}}£</h4>
+                            {%else%}
+                            <h4 class="card-title">{{costCurrent}}/{{costGoal}}</h4>
+                            {%endif%}
+                            <p class="card-text">{{costText}}.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+{% endblock %}

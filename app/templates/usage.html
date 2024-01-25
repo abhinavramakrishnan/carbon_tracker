@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+
+
+{% block content %}
+<div class="card">
+	{{ share.load() }}
+	{{ share.create(title='Share with: ') }}
+</div>
+<div class="container mt-5">
+	<div class="row">
+		<div class="col-lg-4 col-md-6 col-sm-12">
+			<div class="card text-white mb-3 custom-card {% if energy_consumed > 70 %}bg-danger{% else %}bg-success{% endif %} animate__animated animate__fadeInUp"
+				data-bs-toggle="tooltip" data-bs-placement="top"
+				title="{% if energy_consumed > 70 %}High energy consumption!{% else %}Good job on low energy usage!{% endif %}">
+				<div class="card-header">
+					<h2>Total Energy Consumed</h2>
+				</div>
+				<div class="card-body">
+					<h4 class="card-title energy-consumed">You have consumed</h4>
+					<br>
+					<h2 class="card-text energy-consumed typewriter">{{ energy_consumed | round(2)  }} kWh</h2>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-4 col-md-6 col-sm-12">
+			<div class="card text-white mb-3 custom-card {% if cost > 14 %}bg-danger{% else %}bg-success{% endif %} animate__animated animate__fadeInUp"
+				data-bs-toggle="tooltip" data-bs-placement="top"
+				title="{% if cost > 14 %}You have gone over budget!{% else %}Good job on the low spending!{% endif %}">
+				<div class="card-header">
+					<h2>Total Cost</h2>
+				</div>
+				<div class="card-body">
+					<h4 class="card-title cost">You have spent</h4>
+					<br>
+					<h2 class="card-text cost typewriter">{{ cost | round(2) }} GBP</h2>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-4 col-md-6 col-sm-12">
+			<div class="card text-white mb-3 custom-card {% if carbon_emissions > 55 %}bg-danger{% else %}bg-success{% endif %} animate__animated animate__fadeInUp"
+				data-bs-toggle="tooltip" data-bs-placement="top"
+				title="{% if carbon_emissions > 55 %}High carbon emissions!{% else %}Good job on low carbon emissions!{% endif %}">
+				<div class="card-header">
+					<h2>Total Carbon Emissions<h2>
+				</div>
+				<div class="card-body">
+					<h4 class="card-title carbon-emissions">You have emitted</h4>
+					<br>
+					<h2 class="card-text carbon-emissions typewriter">{{ carbon_emissions | round(2) }} kgCO2e</h2>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="../static/typewriter.js"></script>
+<script>
+	// Activate the typewriter effect for all elements with the typewriter class
+	$(document).ready(function () {
+		$('.typewriter').each(function () {
+			var $el = $(this);
+			var text = $el.html();
+			$el.html('');
+			var cursor = $('<span class="cursor">|</span>').appendTo($el);
+			var i = 0;
+			var timer = setInterval(function () {
+				$el.html(text.substring(0, i++) + cursor.outerHTML);
+				if (i > text.length) {
+					clearInterval(timer);
+				}
+			}, 50);
+		});
+	});
+</script>
+
+<script>
+	// Initialize tooltips
+	var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+	var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+		return new bootstrap.Tooltip(tooltipTriggerEl)
+	})
+</script>
+
+
+{% endblock %}

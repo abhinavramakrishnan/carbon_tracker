@@ -1,0 +1,134 @@
+{% extends "base.html" %}
+
+
+
+{% block content %}
+<br>
+<div class="container">
+
+	<div class="col-md card animate__animated animate__fadeInUp">
+		<div class="card-body text-dark">
+			<h1><b>Your Appliances</b></h1>
+
+			
+			<!-- this is a template for an appliance (it is copied and changed)  -->
+			<div id="appliance_template" class="appliance card" hidden>
+				<div class = "card-body">
+					<form action="" method="post" name="appliance" class="applianceForm" >
+						<!-- this field is the unique id generated for this request used to prevent CSRF  -->
+						{{ form.hidden_tag() }}
+		
+						<div class="card-body container text-center animate__animated animate__fadeInUp">
+							<div class="row">
+								<div class="col" hidden>
+									<label for="id">ID:</label>
+									{{ form.id(class_='form-control applianceData applianceID', type='hidden') }}
+									{% for error in form.id.errors %}
+									<div class="alert alert-danger w-100" role="alert">
+										[{{ error }}]
+									</div>
+									{% endfor %}
+								</div>
+								<div class="col">
+									<label for="applianceName">Appliance Name:</label>
+									{{ form.applianceName(class_='form-control applianceData') }}
+									{% for error in form.applianceName.errors %}
+									<div class="alert alert-danger w-100" role="alert">
+										[{{ error }}]
+									</div>
+									{% endfor %}
+								</div>
+								<div class="col">
+									<label for="hoursPerDay">Hours per day:</label>
+									{{ form.hoursPerDay(class_='form-control applianceData') }}
+									{% for error in form.hoursPerDay.errors %}
+									<div class="alert alert-danger w-100" role="alert">
+										[{{ error }}]
+									</div>
+									{% endfor %}
+								</div>
+								<div class="col">
+									<label for="watts">Watts:</label>
+									{{ form.watts(class_='form-control applianceData') }}
+									{% for error in form.watts.errors %}
+									<div class="alert alert-danger w-100" role="alert">
+										[{{ error }}]
+									</div>
+									{% endfor %}
+								</div>
+								<div class="col">
+									<label for="watts">Date Used On:</label>
+									{{ form.dateUsedOn(id='dateUsedOn', class_='form-control applianceData') }}
+									{% for error in form.dateUsedOn.errors %}
+									<div class="alert alert-danger w-100" role="alert">
+										[{{ error }}]
+									</div>
+									{% endfor %}
+								</div>
+								<div class="col">
+									<button type="button" class="btn btn-danger" onclick="removeApplianceElement(this)">Remove</button>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+				<br>
+			</div>
+			<!-- end of template appliance  -->
+
+
+			<div id = "appliance_container" >
+				{% if appliances.count() == 0 %}
+					<div class="appliance card" id="appliance_1">
+						<div class = "card-body bg-light">
+							<p>You don't have any appliances. Add some by clicking the + button</p>
+						</div>
+					</div>
+				{% else %}
+					{% for index in range(appliances.count())%}
+						<div class="appliance card" id="appliance_{{appliances[index].applianceId}} animate__animated animate__fadeInUp">
+							<div class="card-body container text-center">
+								<div class="row">
+									<div class="col">Name:</div>
+									<div class="col">Hours:</div>
+									<div class="col">Watts:</div>
+									<div class="col">Date Used On:</div>
+								</div>
+								<div class="row">
+									<div class="col applianceData" name="id" hidden>{{appliances[index].id}}</div>
+									<div class="col applianceData" name="applianceName">{{appliances[index].applianceName}}</div>
+									<div class="col applianceData" name="hoursPerDay">{{appliances[index].hoursPerDay}}</div>
+									<div class="col applianceData" name="powerRating">{{appliances[index].powerRating}}</div>
+									<div class="col applianceData" name="dateUsedOn">{{appliances[index].dateUsedOn}}</div>
+								</div>
+							</div>
+						</div>
+					{% endfor %}
+				{% endif %}
+			</div>
+
+			<br>
+			<a type="button" class="btn btn-success" href="/addAppliance">+ Add New Appliance</a>
+			<hr>
+			<button type="button" class="btn btn-primary" id="edit_btn"  onclick="editAppliances()">Edit </button>
+			<a type="button" class="btn btn-success" href="/usage">View Usage</a>
+			<button type="button" class="btn btn-info" id="update_btn"  onclick="updateAppliances()" hidden>Update</button>
+		</div>
+	</div>
+
+</div>
+{% endblock %}
+
+
+{% block scripts %}
+<script src="../static/editAppliances.js"> </script>
+<script>
+	document.addEventListener('DOMContentLoaded', function() {
+	  var dateUsedOnInput = document.getElementById('dateUsedOn');
+	  if (dateUsedOnInput) {
+		dateUsedOnInput.type = 'date';
+	  }
+	});
+	</script>
+{% endblock %}
+

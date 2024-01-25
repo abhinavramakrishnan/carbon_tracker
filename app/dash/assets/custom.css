@@ -1,0 +1,26 @@
+.dash-navbar {
+    background-color: #50C878 !important;
+}
+
+.dash-navbar .nav-link {
+    color: white !important;
+    padding: 0.5rem 1rem;
+    /* Adjust the padding values as needed */
+    /* Adjust the margin value to space the buttons to the right */
+}
+
+.dash-navbar .navbar-brand {
+    color: white !important;
+    padding: 0.5rem 1rem;
+    /* Adjust the padding values as needed */
+    margin-left: 2rem;
+}
+
+.dash-navbar .nav-link:hover,
+.dash-navbar .navbar-brand:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    /* Adjust the shadow effect as needed */
+    color: black !important;
+    cursor: pointer;
+    transition: box-shadow 0.3s ease-in-out, color 0.3s ease-in-out;
+}

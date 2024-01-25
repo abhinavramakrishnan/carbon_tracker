@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+	<div class="row">
+		<div class="col">
+			<div class="card mx-auto" style="max-width: 30rem; margin-top: 1rem; margin-bottom: 1rem;">
+				<div class="card-body shadow">
+					<br>
+					<h5 class="card-title text-center h2">Sign Up</h5>
+					<br>
+					<form id="form" action="" method="post" name="create_user">
+						{{ form.hidden_tag() }}
+						<div>
+							<label for="name">Name</label>
+							{{ form.name(class_='form-control') }}
+						</div>
+						<br>
+						<div>
+							<label for="email">Email</label>
+							{{ form.email(class_='form-control') }}
+						</div>
+						<br>
+						<div>
+							<label for="post code">Post Code</label>
+							<!-- pattern got from: https://stackoverflow.com/questions/164979/regex-for-matching-uk-postcodes -->
+							{{ form.postcode(class_='form-control', pattern="(^([A-PR-UWYZ][A-HK-Y]?[0-9][A-Z]? [0-9][A-Z]{2})|(GIR 0AA)$)" ) }}
+						</div>
+						<br>
+							<div class="form-group">
+								<label class="control-label">Energy supplier</label>
+								{{ form.provider(class_='form-select') }}
+							</div>
+						<br>
+						<div>
+							<label for="password">Password</label>
+							{{ form.password(class_='form-control') }}
+						</div>
+						<br>
+						<div>
+							<label for="password_confirm">Confirm Password</label>
+							{{ form.password_confirm(class_='form-control') }}
+						</div>
+						<br>
+						<div class="text-center">
+							<p><input type="submit" class="btn" value="SIGN UP"
+									style="background-color: #50C878; color: white; padding-left: 30px; padding-right: 30px;">
+							</p>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+{% endblock %}

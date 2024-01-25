@@ -1,0 +1,148 @@
+{% extends "base.html" %}
+
+
+
+{% block content %}
+<br>
+<div class="container">
+
+	<div class="col-md card animate__animated animate__fadeInUp">
+		<div class="card-body text-dark">
+			<h1><b>Users</b></h1>
+
+
+			<div id = "user_container" >
+				{% if users|length == 0 %}
+					<div class="user card" id="user_1">
+						<div class = "card-body bg-light">
+							<p>There are no users</p>
+						</div>
+					</div>
+				{% else %}
+					{% for index in range(users|length)%}
+						<div id="user_{{users[index].userId}}" class="user card animate__animated animate__fadeInUp">
+							<div class = "card-body">
+								<form action="" method="post" name="user" class="userForm" >
+									<!-- this field is the unique id generated for this request used to prevent CSRF  -->
+									{{ form.hidden_tag() }}
+					
+									<div class="card-body container text-center animate__animated animate__fadeInUp">
+										<div class="row">
+											<div class="col">
+												<label for="id">id:</label>
+												{{ form.id(class_='form-control userData userID', value = users[index].id) }}
+												{% for error in form.id.errors %}
+												<div class="alert alert-danger w-100" role="alert">
+													[{{ error }}]
+												</div>
+												{% endfor %}
+											</div>
+											<div class="col">
+												<label for="name">name:</label>
+												{{ form.name(class_='form-control userData', value = users[index].name) }}
+												{% for error in form.name.errors %}
+												<div class="alert alert-danger w-100" role="alert">
+													[{{ error }}]
+												</div>
+												{% endfor %}
+											</div>
+											<div class="col">
+												<label for="email">email:</label>
+												{{ form.email(class_='form-control userData', value = users[index].email) }}
+												{% for error in form.email.errors %}
+												<div class="alert alert-danger w-100" role="alert">
+													[{{ error }}]
+												</div>
+												{% endfor %}
+											</div>
+											<div class="col">
+												<label for="watts">password:</label>
+												{{ form.password(class_='form-control userData', value = users[index].password) }}
+												{% for error in form.password.errors %}
+												<div class="alert alert-danger w-100" role="alert">
+													[{{ error }}]
+												</div>
+												{% endfor %}
+											</div>
+											<div class="col">
+												<label for="dateCreated">dateCreated:</label>
+												{{ form.dateCreated(class_='form-control userData', value = users[index].dateCreated) }}
+												{% for error in form.dateCreated.errors %}
+												<div class="alert alert-danger w-100" role="alert">
+													[{{ error }}]
+												</div>
+												{% endfor %}
+											</div>
+											<div class="col">
+												<label for="postcode">postcode:</label>
+												{{ form.postcode(class_='form-control userData', value = users[index].postcode) }}
+												{% for error in form.postcode.errors %}
+												<div class="alert alert-danger w-100" role="alert">
+													[{{ error }}]
+												</div>
+												{% endfor %}
+											</div>
+											<div class="col">
+												<label for="provider">provider:</label>
+												{{ form.provider(class_='form-control userData', value = users[index].provider) }}
+												{% for error in form.provider.errors %}
+												<div class="alert alert-danger w-100" role="alert">
+													[{{ error }}]
+												</div>
+												{% endfor %}
+											</div>
+											<div class="col">
+												<label for="energyTarget">energyTarget:</label>
+												{{ form.energyTarget(class_='form-control userData', value = users[index].energyTarget) }}
+												{% for error in form.energyTarget.errors %}
+												<div class="alert alert-danger w-100" role="alert">
+													[{{ error }}]
+												</div>
+												{% endfor %}
+											</div>
+											<div class="col">
+												<label for="emissionTarget">emissionTarget:</label>
+												{{ form.emissionTarget(class_='form-control userData', value = users[index].emissionTarget) }}
+												{% for error in form.emissionTarget.errors %}
+												<div class="alert alert-danger w-100" role="alert">
+													[{{ error }}]
+												</div>
+												{% endfor %}
+											</div>
+											<div class="col">
+												<label for="costTarget">costTarget:</label>
+												{{ form.costTarget(class_='form-control userData', value = users[index].costTarget) }}
+												{% for error in form.costTarget.errors %}
+												<div class="alert alert-danger w-100" role="alert">
+													[{{ error }}]
+												</div>
+												{% endfor %}
+											</div>
+											<div class="col">
+												<button type="button" class="btn btn-danger" onclick="removeUserElement(this)">Remove</button>
+											</div>
+										</div>
+									</div>
+								</form>
+							</div>
+							<br>
+						</div>
+
+					{% endfor %}
+				{% endif %}
+			</div>
+
+			<br>
+			<hr>
+			<button type="button" class="btn btn-info" id="update_btn"  onclick="updateUsers()">Update</button>
+		</div>
+	</div>
+
+</div>
+{% endblock %}
+
+
+{% block scripts %}
+<script src="../static/editUsers.js"> </script>
+{% endblock %}
+

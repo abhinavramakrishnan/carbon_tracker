@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+
+
+
+{% block content %}
+<br>
+<div class="container">	
+
+	<div class="col-md card animate__animated animate__fadeInUp">
+		<div class="card-body text-dark">
+			<h1><b>Profile</b></h1>
+			<p>You joined on: {{user.dateCreated}} </p>
+
+			<div id="user_template" class="user card">
+				<div class = "card-body">
+					<form action="" method="post" name="user" class="userForm" >
+						<!-- this field is the unique id generated for this request used to prevent CSRF  -->
+						{{ form.hidden_tag() }}
+
+						<div class="card-body container text-center animate__animated animate__fadeInUp">
+							<!-- Split the 8 fields into two columns each containing 4 rows -->
+							<div class="row">
+								<div class="col">
+									<!-- for each row col -->
+									<div class="row">
+										<div class="col">
+											<label for="name">Name:</label>
+										</div>
+										<div class="col">
+											{{ form.name(class_='form-control userData', value=user.name) }}
+										</div>
+									</div>
+									<div class="row">
+										<div class="col">
+											<label for="email" >Email:</label>
+										</div>
+										<div class="col">
+											{{ form.email(class_='form-control userData', value=user.email) }}
+										</div>
+									</div>
+									<div class="row">
+										<div class="col">
+											<label for="passwordHash">Password:</label>
+										</div>
+										<div class="col">
+											{{ form.passwordHash(class_='form-control userData', value=user.passwordHash) }}
+										</div>
+									</div>
+									<div class="row">
+										<div class="col">
+											<label for="postcode">Post code:</label>
+										</div>
+										<div class="col">
+											{{ form.postcode(class_='form-control userData', value=user.postcode) }}
+										</div>
+									</div>
+									
+									
+								</div>
+								<!-- for the second col -->
+								<div class="col">
+									<!-- for each row col -->
+									<div class="row">
+										<div class="col">
+											<label for="provider">Provider:</label>
+										</div>
+										<div class="col">
+											{{ form.provider(class_='form-control userData', value=user.provider) }}
+										</div>
+									</div>
+									<div class="row">
+										<div class="col">
+											<label for="energyTarget">Energy Goal:</label>
+										</div>
+										<div class="col">
+											{{ form.energyTarget(class_='form-control userData', value=user.energyTarget|int) }}
+										</div>
+									</div>
+									<div class="row">
+										<div class="col">
+											<label for="emissionTarget">Emission Goal:</label>
+										</div>
+										<div class="col">
+											{{ form.emissionTarget(class_='form-control userData', value=user.emissionTarget|int)}}
+										</div>
+									</div>
+									<div class="row">
+										<div class="col">
+											<label for="costTarget">Cost Goal:</label>
+										</div>
+										<div class="col">
+											{{ form.costTarget(class_='form-control userData', value=user.costTarget|int) }}
+										</div>
+									</div>
+								</div>
+							</div>
+							
+							<br>
+							<p><input type="submit" class="btn" value="UPDATE"
+								style="background-color: #50C878; color: white; padding-left: 30px; padding-right: 30px;">
+							</p>
+						</div>
+					</form>
+				</div>
+				<br>
+			</div>
+	
+		</div>
+	</div>
+
+</div>
+{% endblock %}

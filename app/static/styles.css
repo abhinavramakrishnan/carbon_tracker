@@ -1,0 +1,83 @@
+.typewriter {
+	overflow: hidden;
+	/* Ensures the content is not revealed until the animation */
+	border-right: 0.15em solid #fff;
+	/* The typewriter cursor */
+	white-space: nowrap;
+	/* Keeps the content on a single line */
+	margin: 0 auto;
+	/* Gives that scrolling effect as the typing happens */
+	letter-spacing: 0.1em;
+	/* Adjust as needed */
+	animation:
+		typing 3.5s steps(40, end),
+		blink-caret 0.75s step-end infinite;
+}
+
+/* The typing effect */
+@keyframes typing {
+	from {
+		width: 0
+	}
+
+	to {
+		width: 100%
+	}
+}
+
+/* The typewriter cursor effect */
+@keyframes blink-caret {
+
+	from,
+	to {
+		border-color: transparent
+	}
+
+	50% {
+		border-color: #fff;
+	}
+}
+
+.custom-card {
+	min-width: 260px;
+	min-height: 400px;
+}
+
+.chat-button {
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+	background-color: #50C878;
+	border: none;
+	border-radius: 50%;
+	width: 60px;
+	height: 60px;
+	text-align: center;
+	font-size: 24px;
+	line-height: 60px;
+	color: #50C878;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+	cursor: pointer;
+	transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.chat-button:hover {
+	transform: translateY(-4px);
+	box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.chat-button img {
+    width: 48px;
+    height: 48px;
+}
+
+.terra-card {
+	/* Increase the width of the card */
+	width: 100%;
+	max-width: 100%;
+  }
+  
+  /* Add spacing between the message box and the send button */
+  .terra-card .input-group .form-control {
+	margin-right: 16px;
+  }

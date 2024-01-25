@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container d-flex align-items-center justify-content-center animate__animated animate__fadeInUp">
+	<div class="row">
+		<div class="col">
+			<div class="card" style="margin-top: 3rem; width: 30rem; " >
+				<div class="card-body shadow ">
+					<br>
+					<h5 class="card-title text-center h2">Add Appliance</h5>
+					<br>
+					<!-- Appliance Info form, sends info in when ValidateOnSubmit is called in views.py -->
+					<form action="" method="post" name="addAppliance">
+						{{ form.hidden_tag() }}
+						<div>
+							<label for="applianceName">Appliance Name</label>
+							{{ form.applianceName(class_='form-control') }}
+						</div>
+						<br>
+						<div>
+							<label for="watts">Power Rating</label>
+							{{ form.watts(class_='form-control') }}
+						</div>
+						<br>
+						<div>
+							<label for="hoursPerDay">Hours per Day</label>
+							{{ form.hoursPerDay(class_='form-control') }}
+						</div>
+						<br>
+						<div class="text-center">
+							<!-- Need to shift one to the left and to the right. Not the right shape either -->
+							<p><input type="submit" class="btn" name="addButton" value="+" style="background-color: #50C878; color: white; padding-left: 30px; padding-right: 30px;"></p>
+							<br>
+							<p><input type="submit" class="btn" name="calButton" value="Calculate" style="background-color: #50C878; color: white; padding-left: 30px; padding-right: 30px;"></p>
+						</div>
+					</form>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+  
+
+{% endblock %}

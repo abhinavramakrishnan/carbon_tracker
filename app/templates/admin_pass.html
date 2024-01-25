@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+
+
+{% block content %}
+<br>
+<div class="container">
+	<div class="col-md card mx-auto animate__animated animate__fadeInUp" style="max-width: 30rem">
+		<div class="card-body text-dark">
+			<h1><b>Admin</b></h1>
+			<p>Enter the correct passcode to enter the admin page:</p>
+
+			<form action="" method="post" name="adminPass">
+				<!-- this field is the unique id generated for this request used to prevent CSRF  -->
+				{{ form.hidden_tag() }}
+				<div class="card-body container text-center">
+					<label for="passcode">Passcode:</label>
+					{{ form.passcode(class_='form-control') }}
+					{% for error in form.passcode.errors %}
+					<div class="alert alert-danger w-100" role="alert">
+						[{{ error }}]
+					</div>
+					{% endfor %}
+					<br>
+					<p><input type="submit" class="btn" value="Enter"
+						style="background-color: #50C878; color: white; padding-left: 30px; padding-right: 30px;">
+					</p>
+				</div>
+			</form>
+			<br>
+	
+		</div>
+	</div>
+</div>
+{% endblock %}

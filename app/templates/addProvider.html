@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container d-flex align-items-center justify-content-center">
+	<div class="row">
+		<div class="col">
+			<div class="card" style="margin-top: 1rem;margin-bottom: 1rem; width: 30rem;">
+				<div class="card-body shadow">
+					<br>
+					<h5 class="card-title text-center h2">Add your electricity provider</h5>
+					<br>
+					<form id="form" action="" method="post" name="create_user">
+						{{ form.hidden_tag() }}
+                            <div>
+                                <label for="provider name">Supplier Name</label>
+                                {{ form.providerName(class_='form-control') }}
+                            </div>
+                            <br>
+                            <div>
+                                <label for="provider tariff">Supplier Tariff</label>
+                                {{ form.providerTariff(class_='form-control') }}
+                            </div>
+                        <br>
+						<div class="text-center">
+							<p><input type="submit" class="btn" value="ADD"
+									style="background-color: #50C878; color: white; padding-left: 30px; padding-right: 30px;">
+							</p>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+{% endblock %}
